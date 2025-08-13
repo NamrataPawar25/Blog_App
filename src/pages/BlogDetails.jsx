@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import UseBlog from '../hook/useBlog'
+import useBlog from '../hook/UseBlog'
 
 const BlogDetails = () => {
   const [b_details,setB_Details] = useState()
   const {ID}= useParams()
-  const {GetBlogByID} = UseBlog()
+  const {GetBlogByID} = useBlog
 
   function fetchData(){
     const getData= GetBlogByID(ID)
@@ -17,7 +17,7 @@ const BlogDetails = () => {
   return (
     <div>
       <h1>Blog Details</h1>
-      {b_details? (<><h2>b_details.title</h2><p>b_details.description</p></>):(<h2>No Such Blog</h2>)}
+      {b_details? (<><h2>{b_details.title}</h2><p>{b_details.description}</p></>):(<h2>No Such Blog</h2>)}
     </div>
   )
 }
