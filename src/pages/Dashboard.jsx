@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import useBlog from '../hook/useBlog'
 import { Link } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 
 const Dashboard = () => {
     const [blogs, setBlogs] = useState([])
-    const {getBlogs} = useBlog()
+    const {getBlogs, deleteBlog} = useBlog()
 
     function fetchData(){
         const getBlogsLocal = getBlogs()
@@ -15,13 +16,21 @@ const Dashboard = () => {
         fetchData()
     },[])
 
-    function GetBlogByID(){
-      
+    function handleDelete(ID){
+      const mgs= deleteBlog(ID)
+      if(mgs){
+        toast(mgs)
+      }
+      else{
+        toast("can't delete")
+      }
+      fetchData()
     }
 
   return (
     <div>
       <h1 className='my-3'>DASHBOARD</h1>
+      <ToastContainer/>
       {blogs.length >0 ?(
         <table className="table">
   <thead>
@@ -37,7 +46,7 @@ const Dashboard = () => {
       <td>{i+1}</td>
       <td><Link to={`/${b.id}`}>{b.title}</Link></td>
       <td><button className='btn btn-success me-2'>Edit</button>
-        <button className='btn btn-danger'>Delete</button></td>
+        <button className='btn btn-danger' onClick={()=>handleDelete(b.id)}>Delete</button></td>
     </tr>
     ))}
     
