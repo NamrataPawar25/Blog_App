@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-import useBlog from "../hook/useBlog"
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import useBlog from '../hook/useBlog'
 
 const AddBlog = () => {
   const [blogTitle, setBlogTitle] = useState()
   const [Description, setDescription] = useState()
-  const { addNewBlog } = useBlog()
+  const { addNewBlog } = useBlog();
   const navigate = useNavigate();
 
   function handleSubmit(event) {
