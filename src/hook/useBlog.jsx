@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const UseBlog = () => {
+const useBlog = () => {
   const [blogs, setBlogs] = useState([]);
+
+  useEffect(()=>{
+    const firstTimeFromLocal= JSON.parse(localStorage.getItem("blogs")) || []
+    console.log(firstTimeFromLocal);
+    setBlogs(firstTimeFromLocal)
+  },[])
 
   function saveBlogs(b) {
     localStorage.setItem("blogs", JSON.stringify(b));
   }
 
   function getBlogs() {
-    return JSON.parse(localStorage.setItem("blogs") || []);
+    return JSON.parse(localStorage.getItem("blogs"));
 }
 
   // saveBlogs(blogs)
@@ -18,7 +24,17 @@ const UseBlog = () => {
     getFromLocal.push(data);
     saveBlogs(getFromLocal);
   }
-  return { saveBlogs, getBlogs, blogs, addNewBlog };
+  function getBlogByID(ID){
+    const getFromLocal= getBlogs()
+    return getFromLocal.find((b,i)=>b.id==ID)
+  }
+  function deleteBlog(ID){
+    const getFromLocal = getBlogs()
+    const blogListAfterDelete= getFromLocal.filter((b,i)=>b.id!==ID)
+    saveBlogs(blogListAfterDelete)
+    return "delete successfully"
+  }
+  return { saveBlogs, getBlogs, blogs, addNewBlog, getBlogByID, deleteBlog };
 };
 
-export default UseBlog;
+export default useBlog;
