@@ -14,7 +14,7 @@ const useBlog = () => {
   }
 
   function getBlogs() {
-    return JSON.parse(localStorage.getItem("blogs"));
+    return JSON.parse(localStorage.getItem("blogs")) || [];
 }
 
   // saveBlogs(blogs)
