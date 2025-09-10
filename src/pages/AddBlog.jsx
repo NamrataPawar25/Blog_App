@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import useBlog from "../hook/UseBlog";
+import useBlog from "../hook/useBlog";
 
 const AddBlog = () => {
   const [blogTitle, setBlogTitle] = useState("");

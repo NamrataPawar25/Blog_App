@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import useBlog from "../hook/UseBlog";
+import useBlog from "../hook/useBlog";
 
 const BlogDetails = () => {
   const [b_details, setB_Details] = useState();

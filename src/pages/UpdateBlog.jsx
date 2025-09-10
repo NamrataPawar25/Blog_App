@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useBlog from "../hook/UseBlog";
+import useBlog from "../hook/useBlog";
 
 const UpdateBlog = () => {
   const { ID } = useParams();
