@@ -24,17 +24,18 @@ const useBlog = () => {
     getFromLocal.push(data);
     saveBlogs(getFromLocal);
   }
-  function getBlogByID(ID){
+  function getBlogById(ID){
     const getFromLocal= getBlogs()
-    return getFromLocal.find((b,i)=>b.id==ID)
+    return getFromLocal.find((b,i)=>String(b.id) === String(ID))
   }
+  
   function deleteBlog(ID){
     const getFromLocal = getBlogs()
     const blogListAfterDelete= getFromLocal.filter((b,i)=>b.id!==ID)
     saveBlogs(blogListAfterDelete)
     return "delete successfully"
   }
-  return { saveBlogs, getBlogs, blogs, addNewBlog, getBlogByID, deleteBlog };
+  return { saveBlogs, getBlogs, blogs, addNewBlog, getBlogById, deleteBlog };
 };
 
 export default useBlog;

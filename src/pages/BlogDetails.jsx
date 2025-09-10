@@ -1,25 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useBlog from '../hook/UseBlog'
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import useBlog from "../hook/UseBlog";
 
 const BlogDetails = () => {
-  const [b_details,setB_Details] = useState()
-  const {ID}= useParams()
-  const {GetBlogByID} = useBlog
+  const [b_details, setB_Details] = useState();
+  const { ID } = useParams();
+  const { getBlogById } = useBlog();
 
-  function fetchData(){
-    const getData= GetBlogByID(ID)
-    setB_Details(getData)
+  function fetchData() {
+    const getData = getBlogById(ID);
+    setB_Details(getData);
   }
-  useEffect(()=>{
-    fetchData()
-  },[])
+
+  useEffect(() => {
+    fetchData();
+  }, [ID]);
+
   return (
-    <div>
-      <h1>Blog Details</h1>
-      {b_details? (<><h2>{b_details.title}</h2><p>{b_details.description}</p></>):(<h2>No Such Blog</h2>)}
+    <div className="container mt-5">
+      {b_details ? (
+        <div className="card shadow-lg border-0 rounded-4">
+          <div className="card-header bg-primary text-white text-center rounded-top">
+            <h2 className="mb-0">📖 Blog Details</h2>
+          </div>
+          <div className="card-body p-4">
+            <h3 className="fw-bold text-dark">{b_details.title}</h3>
+            <p className="text-muted fs-5">{b_details.description}</p>
+          </div>
+          <div className="card-footer text-center bg-light">
+            <Link to="/" className="btn btn-outline-primary">
+              ⬅ Back to Dashboard
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="text-center my-5">
+          <h2 className="text-danger">⚠️ No Such Blog Found</h2>
+          <Link to="/" className="btn btn-primary mt-3">
+            ⬅ Back to Dashboard
+          </Link>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default BlogDetails;
